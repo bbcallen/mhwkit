@@ -85,16 +85,16 @@ func newSolutionEvaluatorFrom(idm *intermediateDataManager) *solutionEvaluator {
 	return slnEval
 }
 
-func (slnEval *solutionEvaluator) replaceWithArmorId(armorId int) {
+func (slnEval *solutionEvaluator) replaceWithArmorIdAtComponent(componentId int, armorId int) {
     idm := slnEval.idm
     newArmor := idm.getArmorById(armorId)
-    previousArmorId := slnEval.armorIdsToBeEvaluated[newArmor.component]
+    previousArmorId := slnEval.armorIdsToBeEvaluated[componentId]
     if previousArmorId != armorId {
     	previousArmor := idm.getArmorById(previousArmorId)
         slnEval.matchingScore -= previousArmor.matchingScore
         slnEval.matchingScore += newArmor.matchingScore
-        slnEval.armorIdsToBeEvaluated[newArmor.component] = armorId
-        slnEval.doesEnhanceRequiredSkillFlags[newArmor.component] = newArmor.doesEnhanceRequiredSkill
+        slnEval.armorIdsToBeEvaluated[componentId] = armorId
+        slnEval.doesEnhanceRequiredSkillFlags[componentId] = newArmor.doesEnhanceRequiredSkill
     }
 }
 
@@ -379,7 +379,8 @@ func (proc *procedure) execute() {
 			panic(errors.New(fmt.Sprintf("empty candidate armor list for component[%v]: %v", componentId, aidEtor)))
 		}
 
-        slnEval.replaceWithArmorId(aidEtor.armorId())
+        slnEval.replaceWithArmorIdAtComponent(componentId, aidEtor.armorId())
+        // fmt.Printf("aidEtor [%v]:%v\n", componentId, aidEtor)
 	}
 
     // main enumerator loop
@@ -407,16 +408,16 @@ nextCombination:
             	} else {
             		idm.statistic.armorCombinationBacktracingCounterByDepth[componentId] += aidEtor.unenumerated()
             		aidEtor.beginAgain()
-                	slnEval.replaceWithArmorId(aidEtor.armorId())
+                	slnEval.replaceWithArmorIdAtComponent(componentId, aidEtor.armorId())
                 	continue
             	}
             }
             if aidEtor.findNext() {
-                slnEval.replaceWithArmorId(aidEtor.armorId())
+                slnEval.replaceWithArmorIdAtComponent(componentId, aidEtor.armorId())
                 continue nextCombination
             } else {
                 aidEtor.beginAgain()
-                slnEval.replaceWithArmorId(aidEtor.armorId())
+                slnEval.replaceWithArmorIdAtComponent(componentId, aidEtor.armorId())
             }
         }
         break
