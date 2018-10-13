@@ -1,8 +1,8 @@
 package mhw
 
 import (
-	"errors"
-	"fmt"
+    "errors"
+    "fmt"
 )
 
 type armorCombinationEvaluator struct {
@@ -67,8 +67,8 @@ func (acEval *armorCombinationEvaluator) evaluateSelectingArmorId(armorId int, s
 
 
 type solutionEvaluator struct {
-	idm             *intermediateDataManager
-	acEval          *armorCombinationEvaluator
+    idm             *intermediateDataManager
+    acEval          *armorCombinationEvaluator
 
     matchingScore          int
     armorIdsToBeEvaluated  [armorComponentCount]int
@@ -79,10 +79,10 @@ type solutionEvaluator struct {
 }
 
 func newSolutionEvaluatorFrom(idm *intermediateDataManager) *solutionEvaluator {
-	slnEval := &solutionEvaluator{}
+    slnEval := &solutionEvaluator{}
     slnEval.idm = idm
     slnEval.acEval = newArmorCombinationEvaluatorFrom(idm)
-	return slnEval
+    return slnEval
 }
 
 func (slnEval *solutionEvaluator) replaceWithArmorIdAtComponent(componentId int, armorId int) {
@@ -90,7 +90,7 @@ func (slnEval *solutionEvaluator) replaceWithArmorIdAtComponent(componentId int,
     newArmor := idm.getArmorById(armorId)
     previousArmorId := slnEval.armorIdsToBeEvaluated[componentId]
     if previousArmorId != armorId {
-    	previousArmor := idm.getArmorById(previousArmorId)
+        previousArmor := idm.getArmorById(previousArmorId)
         slnEval.matchingScore -= previousArmor.matchingScore
         slnEval.matchingScore += newArmor.matchingScore
         slnEval.armorIdsToBeEvaluated[componentId] = armorId
@@ -287,54 +287,54 @@ func (slnEval *solutionEvaluator) printStatistic() {
 
 
 type armorIdEnumerator struct {
-	armorIdList []int
-	index       int
+    armorIdList []int
+    index       int
 }
 
 func newArmorIdEnumerator() *armorIdEnumerator {
-	aidEtor := &armorIdEnumerator{}
-	return aidEtor
+    aidEtor := &armorIdEnumerator{}
+    return aidEtor
 }
 
 func beginEnumerateArmorIdList(armorIdList []int) *armorIdEnumerator {
-	aidEtor := newArmorIdEnumerator()
-	aidEtor.armorIdList = armorIdList
-	aidEtor.index = 0
-	return aidEtor
+    aidEtor := newArmorIdEnumerator()
+    aidEtor.armorIdList = armorIdList
+    aidEtor.index = 0
+    return aidEtor
 }
 
 func (aidEtor *armorIdEnumerator) moveToEnd() {
-	aidEtor.index = len(aidEtor.armorIdList)
+    aidEtor.index = len(aidEtor.armorIdList)
 }
 
 func (aidEtor *armorIdEnumerator) hasValue() bool {
-	return aidEtor.index < len(aidEtor.armorIdList)
+    return aidEtor.index < len(aidEtor.armorIdList)
 }
 
 func (aidEtor *armorIdEnumerator) findNext() bool {
-	if !aidEtor.hasValue() {
-		return false
-	}
+    if !aidEtor.hasValue() {
+        return false
+    }
 
-	aidEtor.index++
-	return aidEtor.hasValue()
+    aidEtor.index++
+    return aidEtor.hasValue()
 }
 
 func (aidEtor *armorIdEnumerator) armorId() int {
-	return aidEtor.armorIdList[aidEtor.index]
+    return aidEtor.armorIdList[aidEtor.index]
 }
 
 func (aidEtor *armorIdEnumerator) beginAgain() bool {
-	aidEtor.index = 0
-	return aidEtor.hasValue()
+    aidEtor.index = 0
+    return aidEtor.hasValue()
 }
 
 func (aidEtor *armorIdEnumerator) unenumerated() int {
-	length := len(aidEtor.armorIdList)
-	if length <= 0 {
-		return 0
-	}
-	return length - aidEtor.index
+    length := len(aidEtor.armorIdList)
+    if length <= 0 {
+        return 0
+    }
+    return length - aidEtor.index
 }
 
 
@@ -353,35 +353,35 @@ func prepareProcedure(cc constraintCollection) *procedure {
     proc := newProcedure()
     proc.constraintCollection = cc
     proc.dataManager = cc.dataManager
-	idm := loadIntermediateDataManager(proc.dataManager)
-	proc.intermediateDataManager = idm
-	idm.evaluateConstraints(cc)
+    idm := loadIntermediateDataManager(proc.dataManager)
+    proc.intermediateDataManager = idm
+    idm.evaluateConstraints(cc)
     return proc
 }
 
 func (proc *procedure) execute() {
-	dm := proc.dataManager
-	cc := proc.constraintCollection
-	idm := proc.intermediateDataManager
-	if idm == nil {
-		idm := loadIntermediateDataManager(dm)
-		proc.intermediateDataManager = idm
-		idm.evaluateConstraints(cc)
-	}
+    dm := proc.dataManager
+    cc := proc.constraintCollection
+    idm := proc.intermediateDataManager
+    if idm == nil {
+        idm := loadIntermediateDataManager(dm)
+        proc.intermediateDataManager = idm
+        idm.evaluateConstraints(cc)
+    }
 
     // init evaluator and enumerators
-	slnEval := newSolutionEvaluatorFrom(idm)
-	aidEtors := [armorComponentCount]armorIdEnumerator{}
-	for componentId, _ := range aidEtors {
-		aidEtors[componentId] = *beginEnumerateArmorIdList(idm.getArmorListByComponentId(componentId))
-		aidEtor := &aidEtors[componentId]
-		if !aidEtor.hasValue() {
-			panic(errors.New(fmt.Sprintf("empty candidate armor list for component[%v]: %v", componentId, aidEtor)))
-		}
+    slnEval := newSolutionEvaluatorFrom(idm)
+    aidEtors := [armorComponentCount]armorIdEnumerator{}
+    for componentId, _ := range aidEtors {
+        aidEtors[componentId] = *beginEnumerateArmorIdList(idm.getArmorListByComponentId(componentId))
+        aidEtor := &aidEtors[componentId]
+        if !aidEtor.hasValue() {
+            panic(errors.New(fmt.Sprintf("empty candidate armor list for component[%v]: %v", componentId, aidEtor)))
+        }
 
         slnEval.replaceWithArmorIdAtComponent(componentId, aidEtor.armorId())
         // fmt.Printf("aidEtor [%v]:%v\n", componentId, aidEtor)
-	}
+    }
 
     // main enumerator loop
     fmt.Printf("score required: %v \n", idm.totalRequisiteMatchingScore)
@@ -399,18 +399,18 @@ nextCombination:
             idm.statistic.armorCombinationPrunedCounterByMatchingScore++
         }
         for i, _ := range aidEtors[1:] {
-        	componentId := i + 1
+            componentId := i + 1
             aidEtor := &aidEtors[componentId]
             if needBacktracing {
-            	armor := idm.getArmorById(aidEtor.armorId())
-            	if armor.doesEnhanceRequiredSkill {
-            		needBacktracing = false
-            	} else {
-            		idm.statistic.armorCombinationBacktracingCounterByDepth[componentId] += aidEtor.unenumerated()
-            		aidEtor.beginAgain()
-                	slnEval.replaceWithArmorIdAtComponent(componentId, aidEtor.armorId())
-                	continue
-            	}
+                armor := idm.getArmorById(aidEtor.armorId())
+                if armor.doesEnhanceRequiredSkill {
+                    needBacktracing = false
+                } else {
+                    idm.statistic.armorCombinationBacktracingCounterByDepth[componentId] += aidEtor.unenumerated()
+                    aidEtor.beginAgain()
+                    slnEval.replaceWithArmorIdAtComponent(componentId, aidEtor.armorId())
+                    continue
+                }
             }
             if aidEtor.findNext() {
                 slnEval.replaceWithArmorIdAtComponent(componentId, aidEtor.armorId())
