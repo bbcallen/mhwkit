@@ -615,7 +615,7 @@ func (dm *dataManager) loadArmors() {
 @bonus 无
 @set 无
 @resistences 3 2 0 2 0
-1 封印的眼罩α					2 1 1 火耐性 +1
+1 封印的眼罩α					2 1 0 火耐性 +1
 @resistences 4 0 4 2 0
 1 墨镜α						1 1 1 昏厥耐性 +1
 @resistences 2 0 2 3 2
