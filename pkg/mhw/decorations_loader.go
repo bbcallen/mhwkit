@@ -105,9 +105,10 @@ func (dm *dataManager) loadDecorations() {
 1 8 砲術珠【1】 砲術
 1 8 茸好珠【1】 最愛菇類
 2 8 超心珠【2】 超會心
-2 8 強走珠【2】 跑者
+2 8 縮短珠【2】 集中
 2 8 拔刀珠【2】 拔刀術【技】
 
+2 8 強走珠【2】 跑者
 2 8 強弓珠【2】 解放弓的蓄力階段
 2 8 心眼珠【2】 心眼／彈道強化
 3 8 解放珠【3】 屬性解放／裝填擴充
@@ -117,7 +118,6 @@ func (dm *dataManager) loadDecorations() {
 ##
 2 7 早氣珠【2】 耐力急速回復
 3 8 貫通珠【3】 貫通彈・龍之箭強化
-2 8 短縮珠【2】 集中
 `
 	if len(dm.decorations) > 0 {
 		panic(errors.New(fmt.Sprintf("duplicated decorations loading")))
