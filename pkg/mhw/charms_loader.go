@@ -42,8 +42,8 @@ func (dm *dataManager) loadCharms() {
 3 3 地學護石 地質學
 3 3 投石護石 投射器裝填數UP
 3 3 潛伏護石 潛伏
-3 3 煙復護石 綿花孢子草的知識
-3 3 沼渡護石 適應水場
+3 3 環境護石 環境利用知識
+3 3 沼渡護石 適應水場・深雪
 3 3 昆蟲學護石 昆蟲標本達人
 3 3 威嚇護石 威嚇
 2 3 砲擊手護石 砲擊手
@@ -119,6 +119,11 @@ func (dm *dataManager) loadCharms() {
 
 #特典
 1 8 追風護石 攻擊 精靈加護
+
+#Master
+1 11 剛力護石 無屬性強化 鈍器能手
+1 11 利刃護石 利刃／彈丸節約
+1 11 封印護石 龍封力強化 振奮
 `
 	if len(dm.charms) > 0 {
 		panic(errors.New(fmt.Sprintf("duplicated charms loading")))

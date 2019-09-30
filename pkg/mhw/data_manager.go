@@ -27,7 +27,7 @@ type dataManager struct {
 	armorIdListsByComponent [armorComponentCount][]int
 
 	slotCombinationOverridingMatrix             [][]int
-	slotCombinationLayoutToSlotCombinationIdMap [4][4][4]int
+	slotCombinationLayoutToSlotCombinationIdMap [5][5][5]int
 }
 
 func newDataManager() *dataManager {
@@ -87,14 +87,16 @@ func (dm *dataManager) registerDecoration(d decoration) {
 	if _, ok := dm.decorationNameToDecorationIdMap[d.name]; ok {
 		panic(errors.New(fmt.Sprintf("try to register duplicated decoration %v", d.name)))
 	}
-	if _, ok := dm.skillIdToDecorationIdMap[d.skillId]; ok {
-		s := dm.skills[d.skillId]
-		panic(errors.New(fmt.Sprintf("try to register decoration %v with duplicated skill %v", d.name, s.name)))
-	}
 	d.id = len(dm.decorations)
 	dm.decorations = append(dm.decorations, d)
 	dm.decorationNameToDecorationIdMap[d.name] = d.id
-	dm.skillIdToDecorationIdMap[d.skillId] = d.id
+	if d.enhancedLevel <= 1 {
+		if _, ok := dm.skillIdToDecorationIdMap[d.skillId]; ok {
+			s := dm.skills[d.skillId]
+			panic(errors.New(fmt.Sprintf("try to register decoration %v with duplicated skill %v", d.name, s.name)))
+		}
+		dm.skillIdToDecorationIdMap[d.skillId] = d.id
+	}
 }
 
 func (dm *dataManager) registerCharm(c charm) {
@@ -145,14 +147,6 @@ func (dm *dataManager) getDecorationIdByName(name string) (id int) {
 		return id
 	} else {
 		panic(errors.New(fmt.Sprintf("can't find decoration %v", name)))
-	}
-}
-
-func (dm *dataManager) getDecorationIdBySkillId(skillId int) (decorationId int) {
-	if decorationId, ok := dm.skillIdToDecorationIdMap[skillId]; ok {
-		return decorationId
-	} else {
-		panic(errors.New(fmt.Sprintf("can't find decoration by skill id %v", skillId)))
 	}
 }
 

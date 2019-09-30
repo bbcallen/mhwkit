@@ -8,10 +8,11 @@ import (
 
 var (
 	sizeToMatchingScorePerSkillLevel []int = []int{
-		10000 * 10000, // no decoration
-		10000,         // 1
-		10500,         // 2
-		10505,         // 3
+		10000000,       // no decoration for this skill, could be bonus skill
+		10000010,       // 1
+		10001000,       // 2
+		10100000,       // 3
+		11000000,       // 4
 	}
 )
 
@@ -24,6 +25,7 @@ type intermediateSkill struct {
 	decorationId             int
 	decorationSize           int
 	availableDecorationCount int
+	matchingScore 			 int
 }
 
 func newIntermediateSkill() *intermediateSkill {
@@ -33,16 +35,6 @@ func newIntermediateSkill() *intermediateSkill {
 
 func (skill *intermediateSkill) isRequired() bool {
 	return skill.requiredLevel > 0
-}
-
-func (skill *intermediateSkill) matchingScorePerLevel() int {
-	if !skill.isRequired() {
-		return 0
-	}
-	if skill.availableDecorationCount < skill.requiredLevel {
-		return sizeToMatchingScorePerSkillLevel[0]
-	}
-	return sizeToMatchingScorePerSkillLevel[skill.decorationSize]
 }
 
 type intermediateArmor struct {
@@ -101,12 +93,15 @@ type intermediateDataManager struct {
 	componentDimensions         [armorComponentCount]intermediateComponentDimension
 	totalRequisiteMatchingScore int
 
-	statistic intermediateStatistic
+	statistic 					intermediateStatistic
+
+	extraEnhancedSkillIds  		map[int]int
 }
 
 func newIntermediateDataManager(dm *dataManager) *intermediateDataManager {
 	idm := &intermediateDataManager{}
 	idm.dataManager = dm
+	idm.extraEnhancedSkillIds = make(map[int]int)
 	return idm
 }
 
@@ -133,8 +128,8 @@ func (idm *intermediateDataManager) requisiteSkillEnhancements() []skillEnhancem
 	return idm.constraintCollection.requiredSkillEnhancements
 }
 
-func (idm *intermediateDataManager) extraSlots() [3]int {
-	var extraSlots [3]int
+func (idm *intermediateDataManager) extraSlots() [4]int {
+	var extraSlots [4]int
 	copy(extraSlots[:], idm.constraintCollection.extraSlotCountGroupBySize[:])
 	return extraSlots
 }
@@ -163,6 +158,9 @@ func (idm *intermediateDataManager) reloadData() {
 			s.decorationId = decorationId
 			s.decorationSize = d.size
 			s.availableDecorationCount = s.maxLevel
+			s.matchingScore = sizeToMatchingScorePerSkillLevel[s.decorationSize]
+		} else {
+			s.matchingScore = sizeToMatchingScorePerSkillLevel[0]
 		}
 		idm.skills = append(idm.skills, *s)
 	}
@@ -202,7 +200,7 @@ func (idm *intermediateDataManager) evaluateRequiredSkillEnhancements() {
 	for _, se := range cc.requiredSkillEnhancements {
 		s := idm.getSkillById(se.skillId)
 		s.requiredLevel = se.enhancedLevel
-		idm.totalRequisiteMatchingScore += se.enhancedLevel * s.matchingScorePerLevel()
+		idm.totalRequisiteMatchingScore += se.enhancedLevel * s.matchingScore
 	}
 
 	for i, count := range cc.extraSlotCountGroupBySize {
@@ -213,10 +211,19 @@ func (idm *intermediateDataManager) evaluateRequiredSkillEnhancements() {
 		a := &idm.armors[i]
 		for _, se := range a.skillEnhancements {
 			if se.skillId > 0 {
-				skill := idm.getSkillById(se.skillId)
-				if skill.isRequired() {
+				s := idm.getSkillById(se.skillId)
+				if s.isRequired() {
 					a.doesEnhanceRequiredSkill = true
-					a.matchingScore += min(se.enhancedLevel, skill.requiredLevel) * skill.matchingScorePerLevel()
+					a.matchingScore += min(se.enhancedLevel, s.requiredLevel) * s.matchingScore
+					/*
+					fmt.Printf("  skill %v: %v.score += min(%v, %v) * %v\n %v\n",
+						s.skill.name,
+						a.armor.name,
+						se.enhancedLevel,
+						s.requiredLevel,
+						s.matchingScore,
+						a.matchingScore)
+						*/
 				}
 			}
 		}
@@ -224,10 +231,19 @@ func (idm *intermediateDataManager) evaluateRequiredSkillEnhancements() {
 			armorSetBonus := dm.getArmorSetBonusById(a.setBonusId)
 			for componentCount, skillId := range armorSetBonus.activatedSkillIdsByComponentCount {
 				if skillId > 0 {
-					skill := idm.getSkillById(skillId)
-					if skill.isRequired() {
+					s := idm.getSkillById(skillId)
+					if s.isRequired() {
 						a.doesEnhanceRequiredSkill = true
-						a.matchingScore += skill.matchingScorePerLevel() / (componentCount - 1)
+						a.matchingScore += s.matchingScore / componentCount + 1
+						/*
+						fmt.Printf("  bonus %v %v: %v.score += %v / %v => %v\n",
+							armorSetBonus.name,
+							s.skill.name,
+							a.armor.name,
+							s.matchingScore,
+							componentCount,
+							a.matchingScore)
+							*/
 					}
 				}
 			}
@@ -235,6 +251,14 @@ func (idm *intermediateDataManager) evaluateRequiredSkillEnhancements() {
 
 		for i, count := range a.slotCombination.sizeDistribution {
 			a.matchingScore += count * sizeToMatchingScorePerSkillLevel[i+1]
+			/*
+			fmt.Printf("  slot:  %v.score += %v * table[%v+1](%v) => %v\n",
+				a.armor.name,
+				count,
+				i,
+				sizeToMatchingScorePerSkillLevel[i+1],
+				a.matchingScore)
+				*/
 		}
 
 		if a.doesEnhanceRequiredSkill {

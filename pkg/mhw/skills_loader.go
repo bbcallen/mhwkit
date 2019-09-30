@@ -16,7 +16,7 @@ func (dm *dataManager) loadSkills() {
 
 5 力量解放
 
-5 火屬性攻擊強化
+6 火屬性攻擊強化
 5 水屬性攻擊強化
 1 不屈
 3 火耐性
@@ -42,7 +42,7 @@ func (dm *dataManager) loadSkills() {
 3 投射器裝填數UP
 1 吹笛名人
 3 防御力DOWN耐性
-1 利刃／彈藥節約
+1 利刃／彈丸節約
 1 防禦強化
 
 3 昏厥耐性
@@ -131,14 +131,14 @@ func (dm *dataManager) loadSkills() {
 3 奪取耐力
 3 精靈加護
 3 睡眠耐性
-3 綿花孢子草的知識
+3 環境利用知識
 1 察覺
 1 滿足感
 1 睡眠瓶追加
 3 精神抖擻
 
 3 潛伏
-3 適應水場
+3 適應水場・深雪
 5 廣域化
 1 適應瘴氣環境
 1 熱傷害無效
@@ -162,6 +162,17 @@ func (dm *dataManager) loadSkills() {
 3 屬性解放／裝填擴充
 3 屬性異常狀態耐性
 1 飛燕【屬性】
+
+3 攻擊守勢
+1 會心擊【特殊】
+1 炸彈客・極意
+1 KO術・極意
+1 真・利刃／彈丸節約
+1 渾身・極意
+1 挑戰者・極意
+1 滿足感・極意
+
+3 轉禍為福
 `
 	if len(dm.skills) > 0 {
 		panic(errors.New(fmt.Sprintf("duplicated skills loading")))

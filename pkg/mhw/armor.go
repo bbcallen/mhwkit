@@ -10,9 +10,6 @@ const (
 	legArmor            = 5
 	charmAsArmor        = 6
 
-	maxArmorEnhancedSkillCount = 2
-
-	resistenceTypeCount = 5
 	fileResistence      = 0
 	waterResistence     = 1
 	thunderResistence   = 2
@@ -31,8 +28,8 @@ type armor struct {
 	name              string
 	component         int
 	setBonusId        int
-	resistences       [resistenceTypeCount]int
-	skillEnhancements [maxArmorEnhancedSkillCount]skillEnhancement
+	resistences       [5]int
+	skillEnhancements [2]skillEnhancement
 
 	slotCombination slotCombination
 }

@@ -10,7 +10,7 @@ type armorCombinationEvaluator struct {
     armorIds                                 [armorComponentCount]int
     enhancedSkillLevels                      []int
     armorSetBonusIdToActivatingArmorCountMap []int
-    slotSizeDistribution                     [3]int // lv1, lv2, lv3
+    slotSizeDistribution                     [4]int // lv1, lv2, lv3, lv4
 }
 
 func newArmorCombinationEvaluatorFrom(idm *intermediateDataManager) *armorCombinationEvaluator {
@@ -36,7 +36,19 @@ func (acEval *armorCombinationEvaluator) evaluateSelectingArmorId(armorId int, s
     armor := idm.getArmorById(armorId)
     for _, es := range armor.skillEnhancements {
         if es.skillId > 0 {
+            /*
+            fmt.Printf("  skill %v: %v.score += %v * %v :: %v",
+                dm.getSkillById(es.skillId).name,
+                armor.armor.name,
+                es.enhancedLevel,
+                sign,
+                acEval.enhancedSkillLevels[es.skillId])
+                */
             acEval.enhancedSkillLevels[es.skillId] += es.enhancedLevel * sign
+            /*
+            fmt.Printf(" => %v\n",
+                acEval.enhancedSkillLevels[es.skillId])
+                */
         }
     }
     for i, count := range armor.slotCombination.sizeDistribution {
@@ -74,7 +86,7 @@ type solutionEvaluator struct {
     armorIdsToBeEvaluated  [armorComponentCount]int
     doesEnhanceRequiredSkillFlags [armorComponentCount]bool
 
-    availableSlotCountGroupBySize [3]int
+    availableSlotCountGroupBySize [4]int
     skillEnhancementsByDecoration []skillEnhancement
 }
 
@@ -104,6 +116,7 @@ func (slnEval *solutionEvaluator) hasEnoughMatchingScore() bool {
 }
 
 func (slnEval *solutionEvaluator) evaluateArmorCombination() {
+    // fmt.Printf("  精英・火龍 火屬性攻擊強化\n")
     idm := slnEval.idm
     acEval := slnEval.acEval
     for componentId, previousArmorId := range acEval.armorIds {
@@ -214,11 +227,13 @@ func (slnEval *solutionEvaluator) printSolution() {
     for skillId, level := range acEval.enhancedSkillLevels {
         if level > 0 {
             totalSkillEnhancements[skillId] = level
+            // fmt.Printf("    skill by armor: %v %v\n", dm.getSkillById(skillId).name, level)
         }
     }
     fmt.Printf("    ----\n")
     for _, se := range slnEval.skillEnhancementsByDecoration {
         if se.enhancedLevel > 0 {
+            // fmt.Printf("    skill by deco: %v %v\n", dm.getSkillById(se.skillId).name, se.enhancedLevel)
             decorationId := idm.getSkillById(se.skillId).decorationId
             d := dm.getDecorationById(decorationId)
             totalSkillEnhancements[d.skillId] += se.enhancedLevel
@@ -241,6 +256,9 @@ func (slnEval *solutionEvaluator) printSolution() {
             prefix = "*"
         } else {
             prefix = " "
+        }
+        if level > skill.requiredLevel {
+            idm.extraEnhancedSkillIds[skillId] = level
         }
         fmt.Printf("    %v %v %v/%v\n", prefix, skill.name, level, skill.maxLevel)
     }
@@ -281,6 +299,11 @@ func (slnEval *solutionEvaluator) printStatistic() {
     fmt.Printf("%v armor combinatons evaluated\n", idm.statistic.armorCombinationEvaluationCounter)
     fmt.Printf("%v armor select/deselect changed\n", idm.statistic.armorChangingCounter)
     fmt.Printf("%v basic solutions\n", idm.statistic.basicSolutionCounter)
+    fmt.Printf("%v extra enhanced skills:\n", len(idm.extraEnhancedSkillIds))
+    for skillId, level := range idm.extraEnhancedSkillIds {
+        skill := idm.getSkillById(skillId)
+        fmt.Printf("      %v %v/%v\n", skill.name, level, skill.maxLevel)
+    }
 }
 
 

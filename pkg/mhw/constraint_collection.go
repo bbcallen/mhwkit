@@ -19,7 +19,7 @@ type constraintCollection struct {
 	dataManager               *dataManager
 	requiredSkillEnhancements []skillEnhancement
 	decorationLimitations     []decorationLimitation
-	extraSlotCountGroupBySize [3]int
+	extraSlotCountGroupBySize [4]int
 }
 
 func newConstraintCollection(dm *dataManager) *constraintCollection {
@@ -31,6 +31,12 @@ func newConstraintCollection(dm *dataManager) *constraintCollection {
 func (cc *constraintCollection) addRequiredSkillByName(name string, level int) {
 	se := skillEnhancement{}
 	se.skillId = cc.dataManager.getSkillIdByName(name)
+	for i, v := range cc.requiredSkillEnhancements {
+		if v.skillId == se.skillId {
+			cc.requiredSkillEnhancements[i].enhancedLevel += level
+			return
+		}
+	}
 	se.enhancedLevel = level
 	cc.requiredSkillEnhancements = append(cc.requiredSkillEnhancements, se)
 }
@@ -42,17 +48,8 @@ func (cc *constraintCollection) addDecorationLimitationByName(name string, maxCo
 	cc.decorationLimitations = append(cc.decorationLimitations, *dl)
 }
 
-func (cc *constraintCollection) addDecorationLimitationBySkillName(name string, maxCount int) {
-	skillId := cc.dataManager.getSkillIdByName(name)
-
-	dl := newDecorationLimitation()
-	dl.decorationId = cc.dataManager.getDecorationIdBySkillId(skillId)
-	dl.maxCount = maxCount
-	cc.decorationLimitations = append(cc.decorationLimitations, *dl)
-}
-
 func (cc *constraintCollection) addExtraSlot(size int, count int) {
-	if size <= 0 || size > 3 {
+	if size <= 0 || size > 4 {
 		panic(errors.New(fmt.Sprintf("invalid decorations size: %v", size)))
 	}
 	cc.extraSlotCountGroupBySize[size-1] += count

@@ -15,14 +15,14 @@ const (
 type slotCombination struct {
 	id               int
 	layout           [3]int
-	sizeDistribution [3]int
+	sizeDistribution [4]int
 	slotCount_       int
 }
 
 func newSlotCombinationFromLayout(layout [3]int) *slotCombination {
 	sc := &slotCombination{}
 	sc.id = 0
-	sc.sizeDistribution = [3]int{}
+	sc.sizeDistribution = [4]int{}
 
 	if layout[0] < layout[1] || layout[1] < layout[2] {
 		panic(errors.New("invalid layout order "))
@@ -30,7 +30,7 @@ func newSlotCombinationFromLayout(layout [3]int) *slotCombination {
 
 	copy(sc.layout[:], layout[:])
 	for _, size := range layout {
-		if size < 0 || size > 3 {
+		if size < 0 || size > 4 {
 			panic(errors.New("invalid slot size"))
 		}
 
@@ -82,7 +82,7 @@ func (dm *dataManager) loadSlotCombinations() {
 		panic(errors.New(fmt.Sprintf("duplicated slot combinations loading")))
 	}
 
-	slotSizes := []int{0, 1, 2, 3}
+	slotSizes := []int{0, 1, 2, 3, 4}
 	for i, x := range slotSizes {
 		for j, y := range slotSizes[:i+1] {
 			for _, z := range slotSizes[:j+1] {
