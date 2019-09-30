@@ -124,6 +124,7 @@ func (dm *dataManager) loadCharms() {
 1 11 剛力護石 無屬性強化 鈍器能手
 1 11 利刃護石 利刃／彈丸節約
 1 11 封印護石 龍封力強化 振奮
+1 11 毅力護石 毅力
 `
 	if len(dm.charms) > 0 {
 		panic(errors.New(fmt.Sprintf("duplicated charms loading")))
