@@ -171,8 +171,9 @@ func (dm *dataManager) loadSkills() {
 1 渾身・極意
 1 挑戰者・極意
 1 滿足感・極意
-
 3 轉禍為福
+1 會心擊【屬性】
+1 寒氣鍊成
 `
 	if len(dm.skills) > 0 {
 		panic(errors.New(fmt.Sprintf("duplicated skills loading")))
