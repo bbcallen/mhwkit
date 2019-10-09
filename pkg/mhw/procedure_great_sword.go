@@ -28,26 +28,27 @@ func testExecuteProcedureGreatSword_4(t *testing.T) {
     cc.addRequiredSkillByName("集中", 3)   // <= 3
     // cc.addRequiredSkillByName("匠", 3)    // <= 5
     cc.addRequiredSkillByName("弱點特效", 3) // <= 3
-    cc.addRequiredSkillByName("看破", 6)   // <= 7
+    cc.addRequiredSkillByName("看破", 7)   // <= 7
     cc.addRequiredSkillByName("超會心", 3) // <= 3
 
     // extra
     // cc.addRequiredSkillByName("心眼／彈道強化", 1)
-    cc.addRequiredSkillByName("昏厥耐性", 2)
-    cc.addRequiredSkillByName("跑者", 1)
+    // cc.addRequiredSkillByName("昏厥耐性", 3)
+    // cc.addRequiredSkillByName("精靈加護", 1)
+    // cc.addRequiredSkillByName("跑者", 1)
     // cc.addRequiredSkillByName("跳躍鐵人", 1)
     // cc.addRequiredSkillByName("火屬性攻擊強化", 1)
     // cc.addRequiredSkillByName("道具使用強化", 1)
     // cc.addRequiredSkillByName("廣域化", 1)
     // cc.addRequiredSkillByName("耳塞", 1)
-    cc.addRequiredSkillByName("力量解放", 1)
-    cc.addRequiredSkillByName("滑走強化", 1)
+    // cc.addRequiredSkillByName("力量解放", 1)
+    // cc.addRequiredSkillByName("滑走強化", 1)
 
     proc := prepareProcedure(*cc)
     proc.execute()
 }
 
-func testExecuteProcedureGreatSword_4_ResistIce(t *testing.T) {
+func testExecuteProcedureGreatSword_4_ResistAny3(t *testing.T) {
     cc := newConstraintCollection(loadDataManager())
 
     // 巨牛大斧II
@@ -60,85 +61,37 @@ func testExecuteProcedureGreatSword_4_ResistIce(t *testing.T) {
     // cc.addExtraSlot(3, 1)
     cc.addExtraSlot(4, -1) // 达人II
     cc.addRequiredSkillByName("看破", -2)
-    cc.addExtraSlot(4, -1) // 冰耐性II
-    cc.addRequiredSkillByName("冰耐性", -2)
+    cc.addExtraSlot(4, -1) // ?耐性II
+    cc.addExtraSlot(1, -1) // ?耐性
+    // cc.addRequiredSkillByName("冰耐性", -2)
 
     addCommonDecorationLimitations(cc)
 
     cc.addRequiredSkillByName("無屬性強化", 1) // <= 1
     cc.addRequiredSkillByName("攻擊", 4)    // <= 7
     cc.addRequiredSkillByName("體力增強", 3)  // <= 3
-
-    cc.addRequiredSkillByName("冰耐性", 3)  // <= 3
     
     cc.addRequiredSkillByName("集中", 3)   // <= 3
     // cc.addRequiredSkillByName("匠", 3)    // <= 5
     cc.addRequiredSkillByName("弱點特效", 3) // <= 3
-    cc.addRequiredSkillByName("看破", 6)   // <= 7
+    cc.addRequiredSkillByName("看破", 5)   // <= 7
     cc.addRequiredSkillByName("超會心", 2) // <= 3
 
     // extra
     // cc.addRequiredSkillByName("心眼／彈道強化", 1)
-    // cc.addRequiredSkillByName("昏厥耐性", 2)
-    // cc.addRequiredSkillByName("跑者", 1)
+    cc.addRequiredSkillByName("昏厥耐性", 3)
+    cc.addRequiredSkillByName("跑者", 1)
     // cc.addRequiredSkillByName("跳躍鐵人", 1)
-    // cc.addRequiredSkillByName("火屬性攻擊強化", 1)
+    cc.addRequiredSkillByName("火屬性攻擊強化", 1)
     // cc.addRequiredSkillByName("道具使用強化", 1)
     // cc.addRequiredSkillByName("廣域化", 1)
     // cc.addRequiredSkillByName("耳塞", 1)
-    cc.addRequiredSkillByName("力量解放", 1)
+    // cc.addRequiredSkillByName("力量解放", 1)
     cc.addRequiredSkillByName("滑走強化", 1)
 
     proc := prepareProcedure(*cc)
     proc.execute()
 }
-
-func testExecuteProcedureGreatSword_1_1_ResistIce(t *testing.T) {
-    cc := newConstraintCollection(loadDataManager())
-
-    // 死神镰刀II
-    cc.addExtraSlot(1, 2)
-    // 衣装
-    // cc.addExtraSlot(4, 1)
-    // cc.addExtraSlot(2, 1)
-    // 衣装
-    // cc.addExtraSlot(3, 1)
-    // cc.addExtraSlot(3, 1)
-    cc.addExtraSlot(4, -1) // 达人II
-    cc.addRequiredSkillByName("看破", -2)
-    cc.addExtraSlot(4, -1) // 耐冰珠II
-    cc.addRequiredSkillByName("冰耐性", -2)
-
-    addCommonDecorationLimitations(cc)
-
-    cc.addRequiredSkillByName("無屬性強化", 1) // <= 1
-    cc.addRequiredSkillByName("攻擊", 4)    // <= 7
-    cc.addRequiredSkillByName("體力增強", 3)  // <= 3
-
-    cc.addRequiredSkillByName("冰耐性", 3)  // <= 3
-
-    cc.addRequiredSkillByName("集中", 3)   // <= 3
-    // cc.addRequiredSkillByName("匠", 3)    // <= 5
-    cc.addRequiredSkillByName("弱點特效", 3) // <= 3
-    cc.addRequiredSkillByName("看破", 7)   // <= 7
-    cc.addRequiredSkillByName("超會心", 2) // <= 3
-
-    // extra
-    // cc.addRequiredSkillByName("道具使用強化", 1)
-    // cc.addRequiredSkillByName("廣域化", 1)
-    // cc.addRequiredSkillByName("耳塞", 1)
-    // cc.addRequiredSkillByName("力量解放", 2)
-    cc.addRequiredSkillByName("心眼／彈道強化", 1)
-    // cc.addRequiredSkillByName("昏厥耐性", 2)
-    // cc.addRequiredSkillByName("跑者", 1)
-    // cc.addRequiredSkillByName("滑走強化", 1)
-    cc.addRequiredSkillByName("跳躍鐵人", 1)
-    cc.addRequiredSkillByName("火屬性攻擊強化", 5)
-
-    proc := prepareProcedure(*cc)
-    proc.execute()
-}
-
 
 func testExecuteProcedureGreatSword_1_1(t *testing.T) {
     cc := newConstraintCollection(loadDataManager())
