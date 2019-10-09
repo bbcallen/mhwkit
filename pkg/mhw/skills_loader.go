@@ -176,6 +176,8 @@ func (dm *dataManager) loadSkills() {
 1 寒氣鍊成
 1 属性加速
 1 真・属性加速
+1 大地缝缠
+1 真・大地缝缠
 `
 	if len(dm.skills) > 0 {
 		panic(errors.New(fmt.Sprintf("duplicated skills loading")))
