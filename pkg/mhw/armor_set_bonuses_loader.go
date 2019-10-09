@@ -45,6 +45,7 @@ func (dm *dataManager) loadArmorSetBonuses() {
 教官的引導 捕獲名人 2
 冰呪龍的神秘 會心擊【屬性】 2 寒氣鍊成 4
 屍套龍的靈脈 超回復力 2
+幻獸的神秘 強運 3
 `
 
 	if len(dm.armorSetBonuses) > 0 {
