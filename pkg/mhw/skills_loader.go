@@ -17,7 +17,7 @@ func (dm *dataManager) loadSkills() {
 5 力量解放
 
 6 火屬性攻擊強化
-5 水屬性攻擊強化
+6 水屬性攻擊強化
 1 不屈
 3 火耐性
 3 水耐性
@@ -26,7 +26,7 @@ func (dm *dataManager) loadSkills() {
 
 1 加速再生
 
-5 冰屬性攻擊強化
+6 冰屬性攻擊強化
 3 收刀術
 3 回復速度
 3 冰耐性
@@ -115,7 +115,7 @@ func (dm *dataManager) loadSkills() {
 3 無傷
 1 散彈・剛射強化
 
-5 雷屬性攻擊強化
+6 雷屬性攻擊強化
 3 道具使用強化
 3 雷耐性
 1 搬運達人
