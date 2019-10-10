@@ -4,6 +4,45 @@ import (
     "testing"
 )
 
+
+// 长枪 冰牙
+func testExecuteProcedureLance_0_IceAttack(t *testing.T) {
+    cc := newConstraintCollection(loadDataManager())
+    addCommonDecorationLimitations(cc)
+
+    cc.addExtraSlot(4, -1) // 达人II
+    cc.addRequiredSkillByName("看破", -2)
+    cc.addExtraSlot(4, -1) // 防禦性能II
+    cc.addRequiredSkillByName("防禦性能", -2)
+    cc.addExtraSlot(4, -1) // 耐衝+體力
+    cc.addRequiredSkillByName("減輕膽怯", -1)
+    cc.addRequiredSkillByName("體力增強", -1)
+
+    cc.addRequiredSkillByName("體力增強", 3)  // <= 3
+    cc.addRequiredSkillByName("攻擊", 4)    // <= 7
+    cc.addRequiredSkillByName("防禦性能", 5)    // <= 5
+    cc.addRequiredSkillByName("防禦強化", 1)    // <= 1
+    cc.addRequiredSkillByName("攻擊守勢", 3)    // <= 3
+
+    // cc.addRequiredSkillByName("匠", 1) // <= 1
+    cc.addRequiredSkillByName("冰屬性攻擊強化", 6) // <= 3
+
+    cc.addRequiredSkillByName("減輕膽怯", 1)
+    cc.addRequiredSkillByName("弱點特效", 1) // <= 3
+    cc.addRequiredSkillByName("看破", 1)   // <= 7
+    // cc.addRequiredSkillByName("超會心", 0) // <= 3
+
+    // extra
+    // cc.addRequiredSkillByName("挑戰者", 0)     // <= 5
+    // cc.addRequiredSkillByName("達人藝", 1) // <= 3
+    // cc.addRequiredSkillByName("昏厥耐性", 3) // <= 3
+    // cc.addRequiredSkillByName("跑者", 1)
+    // cc.addRequiredSkillByName("防禦", 2)
+
+    proc := prepareProcedure(*cc)
+    proc.execute()
+}
+
 // 长枪 炎妃冥灯
 func testExecuteProcedureLance1(t *testing.T) {
     cc := newConstraintCollection(loadDataManager())
