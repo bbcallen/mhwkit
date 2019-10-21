@@ -49,6 +49,7 @@ func (dm *dataManager) loadArmorSetBonuses() {
 幻獸的神秘 強運 3
 溟波龍的神秘 属性加速 2 真・属性加速 4
 天地煌啼龍的神秘 大地缝缠 2 真・大地缝缠 5
+熔山龍的真髓 砲術・極意 3
 `
 
 	if len(dm.armorSetBonuses) > 0 {
