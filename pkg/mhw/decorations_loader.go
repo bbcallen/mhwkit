@@ -9,6 +9,7 @@ func (dm *dataManager) loadDecorations() {
 	// https://www.mhchinese.wiki/adornments
 	const rawData = `
 0 0 无 无
+1 0 任意珠【1】 任意技能1
 
 1 5 耐毒珠【1】 毒耐性
 1 5 耐麻珠【1】 麻痺耐性

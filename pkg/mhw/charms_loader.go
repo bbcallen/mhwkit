@@ -10,6 +10,8 @@ func (dm *dataManager) loadCharms() {
 	const rawData = `
 0 0 无 无
 
+1 1 任意護石 任意護石
+
 3 3 耐毒護石 毒耐性
 3 3 攻擊護石 攻擊
 3 3 防禦護石 防禦

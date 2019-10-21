@@ -9,6 +9,8 @@ func (dm *dataManager) loadSkills() {
 	// https://www.mhchinese.wiki/skills
 	const rawData = `
 0 无
+10 任意技能1
+1 任意護石
 3 體力增強
 3 體力回復量UP
 5 體術
