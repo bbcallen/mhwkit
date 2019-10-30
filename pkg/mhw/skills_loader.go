@@ -182,6 +182,7 @@ func (dm *dataManager) loadSkills() {
 1 大地缝缠
 1 真・大地缝缠
 1 砲術・極意
+1 力量解放・極意
 `
 	if len(dm.skills) > 0 {
 		panic(errors.New(fmt.Sprintf("duplicated skills loading")))
