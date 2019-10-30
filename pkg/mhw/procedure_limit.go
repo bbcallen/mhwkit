@@ -17,3 +17,9 @@ func addCommonDecorationLimitations(cc *constraintCollection) {
     cc.addDecorationLimitationByName("早氣珠【2】", 0)   // 耐力急速回復 3
     cc.addDecorationLimitationByName("貫通珠【3】", 0)   // 貫通彈・龍之箭強化 1
 }
+
+func getArmorBlackList() map[string]bool {
+    blackList := make(map[string]bool)
+
+    return blackList
+}

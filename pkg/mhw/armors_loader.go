@@ -1617,6 +1617,8 @@ func (dm *dataManager) loadArmors() {
 	// const rawData = rawDataStart + rawDataUpper + rawDataMaster
 	const rawData = rawDataStart + rawDataMaster
 
+    blackList := make(map[string]bool)
+
 	if len(dm.charms) > 0 {
 		panic(errors.New(fmt.Sprintf("duplicated armors loading")))
 	}
@@ -1673,6 +1675,9 @@ func (dm *dataManager) loadArmors() {
 					panic(errors.New("unexpected column"))
 				}
 			}
+            if blackList[a.name] {
+                continue
+            }
 			slotCombinationId := dm.getSlotCombinationIdByLayout(slotLayout)
 			a.slotCombination = *dm.getSlotCombinationById(slotCombinationId)
 			dm.registerArmor(*a)
