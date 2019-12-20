@@ -55,6 +55,7 @@ func (dm *dataManager) loadArmorSetBonuses() {
 公會的見識 幸運 2 剝取名人 4
 金獅子的怒氣 心眼／彈道強化 2 剛刃研磨 4
 冥赤龍的封印 龍脈覺醒 3 真・龍脈覺醒 5
+萬福的祝福 萬福的獻禮 3 萬福的恩惠 5
 `
 
 	if len(dm.armorSetBonuses) > 0 {

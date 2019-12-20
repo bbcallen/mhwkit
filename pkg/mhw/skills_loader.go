@@ -187,6 +187,8 @@ func (dm *dataManager) loadSkills() {
 1 力量解放・極意
 1 龍脈覺醒
 1 真・龍脈覺醒
+1 萬福的獻禮
+1 萬福的恩惠
 `
 	if len(dm.skills) > 0 {
 		panic(errors.New(fmt.Sprintf("duplicated skills loading")))

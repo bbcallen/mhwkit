@@ -1701,10 +1701,22 @@ func (dm *dataManager) loadArmors() {
 5 精英・龍紋護腿β                      4 2 1 超會心 +1
 
 @rare 9
+@bonus 萬福的祝福
+@resistences 1 1 1 4 1
+@set 精英・風火輪α
+1 精英・風火輪頭盔α                     4 0 0 看破 +3
+2 精英・風火輪鎧甲α                     4 0 0 耐力急速回復 +2
+3 精英・風火輪腕甲α                     4 0 0 轉禍為福 +2
+4 精英・風火輪腰甲α                     1 1 0 體術 +3
+5 精英・風火輪護腿α                     4 2 0 體力增強 +2
+
 @bonus 无
 @set 无
 @resistences 0 0 0 5 0
 1 精英・溫泉銀猴α 						2 1 0 體力回復量UP +2
+
+@resistences -1 3 0 4 0
+1 精英・企鹅頭套α                      4 0 0 迴避性能 +2
 `
 
 	// const rawData = rawDataStart + rawDataUpper + rawDataMaster
