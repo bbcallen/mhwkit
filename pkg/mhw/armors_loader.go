@@ -1717,6 +1717,10 @@ func (dm *dataManager) loadArmors() {
 
 @resistences -1 3 0 4 0
 1 精英・企鹅頭套α                      4 0 0 迴避性能 +2
+
+@rare 12
+@resistences -3 0 0 1 5
+1 精英・封印的龍骸布α                    4 4 0 怨恨 +2
 `
 
 	// const rawData = rawDataStart + rawDataUpper + rawDataMaster
