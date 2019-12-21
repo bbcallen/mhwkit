@@ -139,6 +139,9 @@ func (slnEval *solutionEvaluator) evaluateDecorations() bool {
 
     for i, count := range idm.extraSlots() {
         slnEval.availableSlotCountGroupBySize[i] += count
+        if (slnEval.availableSlotCountGroupBySize[i] < 0) {
+            return false
+        } 
     }
 
 nextSkill:
