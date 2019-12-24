@@ -2,9 +2,7 @@ package mhw
 
 func addCommonDecorationLimitations(cc *constraintCollection) {
     // 4
-    cc.addDecorationLimitationByName("攻擊珠【1】", 5)   // 攻擊 7
-    // 5
-    cc.addDecorationLimitationByName("拔刀珠【2】", 2)   // 拔刀術【技】 3
+    cc.addDecorationLimitationByName("攻擊珠【1】", 6)   // 攻擊 7
     // 7
     cc.addDecorationLimitationByName("匠珠【3】", 2)    // 匠 5
     // 9

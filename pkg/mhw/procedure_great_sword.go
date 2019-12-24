@@ -63,6 +63,12 @@ func testExecuteProcedureGreatSword_4_AnyCharm(t *testing.T) {
     cc.addExtraSlot(4, -1)
     cc.addRequiredSkillByName("挑戰者", -1)
     cc.addRequiredSkillByName("體力增強", -1)
+    cc.addExtraSlot(4, -1)
+    cc.addRequiredSkillByName("集中", -1)
+    cc.addRequiredSkillByName("體力增強", -1)
+    // cc.addExtraSlot(4, -1)
+    // cc.addRequiredSkillByName("減輕膽怯", -1)
+    // cc.addRequiredSkillByName("體力增強", -1)
 
     addCommonDecorationLimitations(cc)
 
@@ -78,13 +84,13 @@ func testExecuteProcedureGreatSword_4_AnyCharm(t *testing.T) {
 
     // extra
     // cc.addRequiredSkillByName("心眼／彈道強化", 1)
-    // cc.addRequiredSkillByName("昏厥耐性", 2)
-    cc.addRequiredSkillByName("精靈加護", 1)
-    cc.addRequiredSkillByName("挑戰者", 1)
     cc.addRequiredSkillByName("地質學", 1)
+    cc.addRequiredSkillByName("昏厥耐性", 3)
+    cc.addRequiredSkillByName("挑戰者", 2)
+    cc.addRequiredSkillByName("耳塞", 1)
     // cc.addRequiredSkillByName("體力回復量UP", 1)
     // cc.addRequiredSkillByName("轉禍為福", 1)
-    // cc.addRequiredSkillByName("怨恨", 2)
+    
     
     
     // cc.addRequiredSkillByName("減輕膽怯", 1)
@@ -148,14 +154,14 @@ func testExecuteProcedureGreatSword_4_Gathering(t *testing.T) {
 
     addCommonDecorationLimitations(cc)
 
-    cc.addExtraSlot(4, -1) // 無食珠II
-    cc.addRequiredSkillByName("飢餓耐性", -2) // <= 3
     cc.addExtraSlot(4, -1) // 潛伏珠III
     cc.addRequiredSkillByName("潛伏", -3) // <= 3
     cc.addExtraSlot(4, -1) // 威嚇珠III
     cc.addRequiredSkillByName("威嚇", -3) // <= 3
     cc.addExtraSlot(4, -1) // 地學珠II
     cc.addRequiredSkillByName("地質學", -2) // <= 3
+    cc.addExtraSlot(4, -1) // 無食珠II
+    cc.addRequiredSkillByName("飢餓耐性", -2) // <= 3
 
     cc.addRequiredSkillByName("地質學", 3) // <= 3
     cc.addRequiredSkillByName("威嚇", 3) // <= 3
@@ -169,12 +175,17 @@ func testExecuteProcedureGreatSword_4_Gathering(t *testing.T) {
 
     // extra
     cc.addRequiredSkillByName("適應瘴氣環境", 1) // <= 1
+    cc.addRequiredSkillByName("熱傷害無效", 1) // <= 1
+    cc.addRequiredSkillByName("寒冷耐性", 1) // <= 1
+    cc.addRequiredSkillByName("適應水場・深雪", 1) // <= 1
+    cc.addRequiredSkillByName("突破耐力上限", 1) // <= 1
+    cc.addRequiredSkillByName("體術", 1) // <= 5
+
+    // cc.addRequiredSkillByName("攀岩者", 1) // <= 1    
     // cc.addRequiredSkillByName("採集達人", 1) // <= 1
-    // cc.addRequiredSkillByName("突破耐力上限", 1) // <= 1
     // cc.addRequiredSkillByName("滿足感", 1) // <= 1
-    cc.addRequiredSkillByName("最愛菇類", 1) // <= 1
+    // cc.addRequiredSkillByName("最愛菇類", 1) // <= 1
     // cc.addRequiredSkillByName("屬性異常狀態耐性", 1) // <= 3
-    // cc.addRequiredSkillByName("體術", 1) // <= 5
     // cc.addRequiredSkillByName("探索者的幸運", 1) // <= 1
     // cc.addRequiredSkillByName("導蟲反應距離UP", 1) // <= 1
 
@@ -245,18 +256,22 @@ func testExecuteProcedureGreatSword_4_VsLunastra(t *testing.T) {
     cc.addExtraSlot(4, -1)
     cc.addRequiredSkillByName("火耐性", -2)
     cc.addExtraSlot(4, -1)
-    cc.addRequiredSkillByName("挑戰者", -1)
-    cc.addRequiredSkillByName("精靈加護", -1)
-    cc.addExtraSlot(4, -1)
-    cc.addRequiredSkillByName("挑戰者", -1)
+    cc.addRequiredSkillByName("集中", -1)
     cc.addRequiredSkillByName("體力增強", -1)
+    // cc.addExtraSlot(4, -1)
+    // cc.addRequiredSkillByName("減輕膽怯", -1)
+    // cc.addRequiredSkillByName("體力增強", -1)
+    // cc.addExtraSlot(4, -1)
+    // cc.addRequiredSkillByName("挑戰者", -1)
+    // cc.addRequiredSkillByName("精靈加護", -1)
+    // cc.addExtraSlot(4, -1)
+    // cc.addRequiredSkillByName("挑戰者", -1)
+    // cc.addRequiredSkillByName("體力增強", -1)
 
     addCommonDecorationLimitations(cc)
 
     cc.addRequiredSkillByName("熱傷害無效", 1)
     cc.addRequiredSkillByName("火耐性", 3)
-    // cc.addRequiredSkillByName("耳塞", 5)
-    // cc.addRequiredSkillByName("風壓完全無効", 1)
 
     cc.addRequiredSkillByName("攻擊", 4)    // <= 7
     cc.addRequiredSkillByName("體力增強", 3)  // <= 3
@@ -266,30 +281,24 @@ func testExecuteProcedureGreatSword_4_VsLunastra(t *testing.T) {
     cc.addRequiredSkillByName("看破", 7)   // <= 7
     cc.addRequiredSkillByName("超會心", 3) // <= 3
 
+    // cc.addRequiredSkillByName("匠", 3)
+
     // extra
     // cc.addRequiredSkillByName("心眼／彈道強化", 1)
+    cc.addRequiredSkillByName("地質學", 1)
+    cc.addRequiredSkillByName("昏厥耐性", 3)
     cc.addRequiredSkillByName("精靈加護", 1)
-    // cc.addRequiredSkillByName("昏厥耐性", 2)
-    // cc.addRequiredSkillByName("怨恨", 2)
     cc.addRequiredSkillByName("體力回復量UP", 1)
     
-    // cc.addRequiredSkillByName("冰屬性攻擊強化", 2)   // <= 7
-    // cc.addRequiredSkillByName("耳塞", 1)   // <= 7
-    // cc.addRequiredSkillByName("迴避性能", 1)   // <= 7
-    // cc.addRequiredSkillByName("匠", 2)
-    // cc.addRequiredSkillByName("適應水場・深雪", 1)
-    // cc.addRequiredSkillByName("精靈加護", 2)
-    // cc.addRequiredSkillByName("減輕膽怯", 1)
+    // cc.addRequiredSkillByName("耳塞", 1)
+    // cc.addRequiredSkillByName("挑戰者", 2)
+    // cc.addRequiredSkillByName("耳塞", 1)
     // cc.addRequiredSkillByName("轉禍為福", 1)
     
+    
+    
+    // cc.addRequiredSkillByName("減輕膽怯", 1)
     // cc.addRequiredSkillByName("跑者", 1)
-    // cc.addRequiredSkillByName("跳躍鐵人", 1)
-    // cc.addRequiredSkillByName("火屬性攻擊強化", 1)
-    // cc.addRequiredSkillByName("道具使用強化", 1)
-    // cc.addRequiredSkillByName("廣域化", 1)
-    // cc.addRequiredSkillByName("耳塞", 1)
-    // cc.addRequiredSkillByName("力量解放", 1)
-    // cc.addRequiredSkillByName("滑走強化", 1)
 
     proc := prepareProcedure(*cc)
     proc.execute()
@@ -580,7 +589,7 @@ func testExecuteProcedureGreatSword_4_VsSafiJiiva(t *testing.T) {
 
     addCommonDecorationLimitations(cc)
 
-    cc.addRequiredSkillByName("攻擊", 2)    // <= 7
+    cc.addRequiredSkillByName("攻擊", 3)    // <= 7
     cc.addRequiredSkillByName("體力增強", 3)  // <= 3
 
     cc.addRequiredSkillByName("集中", 3)   // <= 3
@@ -592,7 +601,7 @@ func testExecuteProcedureGreatSword_4_VsSafiJiiva(t *testing.T) {
     cc.addRequiredSkillByName("火耐性", 3)
     // extra
     cc.addRequiredSkillByName("昏厥耐性", 3)
-    cc.addRequiredSkillByName("精靈加護", 1)
+    cc.addRequiredSkillByName("爆破屬性強化", 2)
     // cc.addRequiredSkillByName("迴避性能", 1)
 
     // cc.addRequiredSkillByName("心眼／彈道強化", 1)

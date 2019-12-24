@@ -4,85 +4,55 @@ import (
     "testing"
 )
 
-// 轻弩
-// 皇后甲壳・炎妃 毅力
-// 冰结 风压无效
-func testExecuteProcedureLightBowgun1(t *testing.T) {
+// 轻弩水速射vs冥赤龙
+func testExecuteProcedureLightBowgun_4_WaterAmmo_VsSafiJiiva(t *testing.T) {
     cc := newConstraintCollection(loadDataManager())
     addCommonDecorationLimitations(cc)
         
-    cc.addExtraSlot(1, 1)
-    cc.addRequiredSkillByName("屬性解放／裝填擴充", 3)    // <= 3
-    cc.addRequiredSkillByName("體力增強", 3)  // <= 3
-    cc.addRequiredSkillByName("熱傷害無效", 1)  // <= 1
-    cc.addRequiredSkillByName("會心攻擊【屬性】", 1)  // <= 1
-    cc.addRequiredSkillByName("冰屬性攻擊強化", 3)  // <= 5
+    cc.addExtraSlot(4, 1)
 
-    cc.addRequiredSkillByName("心眼／彈道強化", 1) // <= 1
-    cc.addRequiredSkillByName("火耐性", 3)  // <= 3
+    // cc.addExtraSlot(4, -1) // 达人II
+    // cc.addRequiredSkillByName("看破", -2)
+    cc.addExtraSlot(4, -1)
+    cc.addRequiredSkillByName("體力增強", -1)
+    cc.addRequiredSkillByName("破壞王", -1)
+    cc.addExtraSlot(4, -1)
+    cc.addRequiredSkillByName("水屬性攻擊強化", -2)
+    cc.addExtraSlot(4, -1)
+    cc.addRequiredSkillByName("屬性解放／裝填擴充", -1) // <= 3
+    cc.addRequiredSkillByName("精靈加護", -1)  // <= 3
+    cc.addExtraSlot(4, -1)
+    cc.addRequiredSkillByName("破壞王", -1) // <= 3
+    cc.addRequiredSkillByName("整備", -1)  // <= 3
+    // cc.addExtraSlot(4, -1)
+    // cc.addRequiredSkillByName("屬性異常狀態耐性", -1)
+    // cc.addRequiredSkillByName("攻擊", -1)
+    // cc.addExtraSlot(4, -1)
+    // cc.addRequiredSkillByName("挑戰者", -1) // <= 3
+    // cc.addRequiredSkillByName("體力增強", -1)  // <= 3
 
-    // cc.addRequiredSkillByName("精神抖擻", 1)  // <= 3
 
-    cc.addRequiredSkillByName("昏厥耐性", 3) // <= 3
-    cc.addRequiredSkillByName("風壓耐性", 5) // <= 5
+    cc.addRequiredSkillByName("真・龍脈覺醒", 1)
+    cc.addRequiredSkillByName("龍脈覺醒", 1)
+    // cc.addRequiredSkillByName("迴避性能", 4) // <= 5
+    cc.addRequiredSkillByName("屬性異常狀態耐性", 3)
+    cc.addRequiredSkillByName("超會心", 3)
+    // cc.addRequiredSkillByName("精神抖擻", 1) // <= 3
 
+    cc.addRequiredSkillByName("利刃／彈丸節約", 1)
+    cc.addRequiredSkillByName("屬性解放／裝填擴充", 3)
+    cc.addRequiredSkillByName("體力增強", 3)
+    cc.addRequiredSkillByName("破壞王", 3)
+    cc.addRequiredSkillByName("水屬性攻擊強化", 6)
+
+    cc.addRequiredSkillByName("怨恨", 1)
+
+    // cc.addRequiredSkillByName("攻擊", 1)  // <= 7
+
+    // cc.addRequiredSkillByName("昏厥耐性", 3) // <= 3
+    // cc.addRequiredSkillByName("風壓耐性", 5) // <= 5
+    // cc.addRequiredSkillByName("睡眠屬性強化", 3) // <= 3
     // cc.addRequiredSkillByName("廣域化", 2) // <= 5
-
-    proc := prepareProcedure(*cc)
-    proc.execute()
-}
-
-// 轻弩
-// 皇后甲壳・炎妃 毅力
-// 冰结 风压无效
-func testExecuteProcedureLightBowgun2(t *testing.T) {
-    cc := newConstraintCollection(loadDataManager())
-    addCommonDecorationLimitations(cc)
-        
-    cc.addExtraSlot(1, 1)
-    cc.addRequiredSkillByName("屬性解放／裝填擴充", 3)    // <= 3
-    cc.addRequiredSkillByName("體力增強", 3)  // <= 3
-    cc.addRequiredSkillByName("熱傷害無效", 1)  // <= 1
-    cc.addRequiredSkillByName("會心攻擊【屬性】", 1)  // <= 1
-    cc.addRequiredSkillByName("冰屬性攻擊強化", 3)  // <= 5
-
-    cc.addRequiredSkillByName("心眼／彈道強化", 1) // <= 1
-    cc.addRequiredSkillByName("火耐性", 3)  // <= 3
-    cc.addRequiredSkillByName("昏厥耐性", 3) // <= 3
-
-    cc.addRequiredSkillByName("精神抖擻", 2)  // <= 3
-
-    cc.addRequiredSkillByName("挑戰者", 2)  // <= 5
-    cc.addRequiredSkillByName("回復速度", 2)  // <= 3
-    // cc.addRequiredSkillByName("迴避性能", 2)  // <= 5
-
-    // cc.addRequiredSkillByName("看破", 1)  // <= 7
-    // cc.addRequiredSkillByName("超會心", 1)  // <= 3
-
-    // cc.addRequiredSkillByName("廣域化", 2) // <= 5
-
-    proc := prepareProcedure(*cc)
-    proc.execute()
-}
-
-// 轻弩
-// 皇后甲壳・冥灯 利刃／彈藥節約
-// 斩裂
-func testExecuteProcedureLightBowgun3(t *testing.T) {
-    cc := newConstraintCollection(loadDataManager())
-    addCommonDecorationLimitations(cc)
-        
-    cc.addExtraSlot(3, 1)
-    cc.addExtraSlot(1, 1)
-    cc.addRequiredSkillByName("屬性解放／裝填擴充", 3)    // <= 3
-    cc.addRequiredSkillByName("體力增強", 3)  // <= 3
-    cc.addRequiredSkillByName("熱傷害無效", 1)  // <= 1
-    cc.addRequiredSkillByName("火耐性", 3)  // <= 3
-
-    cc.addRequiredSkillByName("昏厥耐性", 3) // <= 3
-    cc.addRequiredSkillByName("風壓耐性", 5) // <= 5
-    cc.addRequiredSkillByName("睡眠屬性強化", 3) // <= 3
-    cc.addRequiredSkillByName("廣域化", 2) // <= 5
 
     // cc.addRequiredSkillByName("回復速度", 2) // <= 3
 
@@ -98,10 +68,7 @@ func testExecuteProcedureLightBowgun3(t *testing.T) {
 }
 
 
-// 轻弩
-// 皇后甲壳・冥灯 利刃／彈藥節約
-// 雷速射 斩裂 渣渣辉
-func testExecuteProcedureLightBowgun4(t *testing.T) {
+func testExecuteProcedureLightBowgun_4_StickyAmmo_VsSafiJiiva(t *testing.T) {
     cc := newConstraintCollection(loadDataManager())
     addCommonDecorationLimitations(cc)
         
@@ -139,3 +106,4 @@ func testExecuteProcedureLightBowgun4(t *testing.T) {
     proc := prepareProcedure(*cc)
     proc.execute()
 }
+

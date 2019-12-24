@@ -5,7 +5,7 @@ import (
 )
 
 func TestExecuteProcedure(t *testing.T) {
-	testExecuteProcedureGreatSword_4_VsLunastra(t)
+	testExecuteProcedureGunlance_4_4_AnyCharm(t)
 }
 
 func BenchmarkExecuteProcedure(b *testing.B) {
