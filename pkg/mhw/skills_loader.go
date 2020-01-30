@@ -41,7 +41,7 @@ func (dm *dataManager) loadSkills() {
 7 防禦
 5 防禦性能
 3 快吃
-3 投射器裝填數UP
+5 投射器裝填數UP
 1 吹笛名人
 3 防御力DOWN耐性
 1 利刃／彈丸節約
@@ -73,7 +73,7 @@ func (dm *dataManager) loadSkills() {
 1 風壓完全無効
 5 怨恨
 
-3 砲術
+5 砲術
 5 迴避性能
 3 迴避距離UP
 3 飢餓耐性
